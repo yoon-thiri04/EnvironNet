@@ -13,19 +13,18 @@ import numpy as np
 DEVICE = "cpu"
 CKPT_PATH = "environ_net.pt"
 IMG_SIZE = 224
+@st.cache_resource
+def load_model_and_classes():
+    checkpoint = torch.load(CKPT_PATH, map_location=DEVICE)
+    model = models.mobilenet_v2(weights=None)
+    in_features = model.classifier[1].in_features
+    model.classifier[1] = nn.Linear(in_features, checkpoint["config"]["num_classes"])
+    model.load_state_dict(checkpoint["model_state"])
+    model.to(DEVICE).eval()
+    class_names = list(checkpoint["class_to_idx"].keys())
+    return model, class_names
 
-# load the model weight
-checkpoint = torch.load(CKPT_PATH, map_location=DEVICE)
-
-# Rebuild MobileNetV2
-model = models.mobilenet_v2(weights=None)
-in_features = model.classifier[1].in_features
-model.classifier[1] = nn.Linear(in_features, checkpoint["config"]["num_classes"])
-model.load_state_dict(checkpoint["model_state"])
-model.to(DEVICE)
-model.eval()
-
-class_names = list(checkpoint["class_to_idx"].keys())
+model, class_names = load_model_and_classes()
 
 # Image transform
 base_transform = transforms.Compose([
