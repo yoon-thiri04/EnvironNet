@@ -20,7 +20,8 @@ EnvironNet is a deep learning-powered application that classifies everyday waste
 ## 🔹 Features
 - Classifies images of waste into **10 categories**: Battery, Plastic, Shoe, Cardboard, Clothes, Metal, Organic, Glass, Paper, and Trash.
 - Supports **image upload** from devices.
-- Supports **camera input** on local devices.
+- Supports **camera input** .
+- Supports **live webcam** feature but only on local devices , so clone this project to test. 
 - Provides **top-3 predictions** with probabilities.
 - Smooth and interactive UI built with Streamlit.
 - Designed for **fast inference**, even on mobile devices.
@@ -38,8 +39,7 @@ EnvironNet is a deep learning-powered application that classifies everyday waste
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/environnet.git
-cd environnet
+git clone https://github.com/yoon-thiri04/EnvironNet.git
 ````
 
 2. Create a virtual environment:
@@ -70,7 +70,7 @@ streamlit run app.py
 
 1. **Home Page:** Overview of EnvironNet and project goals.
 2. **Upload Photo:** Upload an image from your device or select from demo images.
-3. **Take Photo:** Use your device camera to capture a new image (mobile only).
+3. **Take Photo:** Use your device camera to capture a new image.
 4. **Live Webcam:** Real-time classification using webcam (local only).
 5. The app shows **top-3 predicted classes** with probabilities for each image.
 
